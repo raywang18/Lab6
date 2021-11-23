@@ -1,17 +1,27 @@
 from LED8x8 import LED8x8
 import multiprocessing
-import time
+import random
 
 if __name__ == "__main__":
-    pattern = [0b00111100, 0b01000010, 0b10100101, 0b10000001, 
-                0b10100101, 0b10011001, 0b01000010, 0b00111100]
     dataPin, latchPin, clockPin = 17, 27, 22
-    multiArray = multiprocessing.Array('b', len(pattern))
-    # initial values for multiprocessing Array
-    for i in range(len(pattern)):
-      multiArray[i] = pattern[i]
-    display = LED8x8(dataPin, latchPin, clockPin, pattern)
-    p1 = multiprocessing.Process(target=display.display, args=([multiArray]))
+    pattern = multiprocessing.Array('b', 8)
+    led_display = LED8x8(dataPin, latchPin, clockPin)
+    def display_fn(pattern):
+      led_display.display(pattern)
+    p1 = multiprocessing.Process(target=display_fn, args=(pattern))
+    p1.daemon = True
     p1.start()
+    for i in range(len(pattern)):
+      pattern[i] = 0b11111111
+    x = 0
+    y = 0
     while True:
-      multiArray[3] = 0b11111111
+      dx = random.randint(-1, 1)
+      dy = random.randint(-1, 1)
+
+      if x+dx<=7 and x+dx>=0:
+        x += dx
+      if y+dy<=7 and y+dy>=0:
+        y += dy
+
+      pattern[y] = ~(0b10000000 >> x) & 0b11111111

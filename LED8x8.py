@@ -3,14 +3,12 @@ import time
 
 class LED8x8():
 
-    def __init__(self, data, latch, clock, pattern):
-        self.shifter = Shifter(data, latch, clock)
-        self.pattern = pattern            
+    def __init__(self, data, latch, clock):
+        self.shifter = Shifter(data, latch, clock)            
     
-    def display(self, multiArray):
+    def display(self, pattern):
         while True:
-            for i in range(len(self.pattern)):
-                multiArray[i] = self.pattern[i]
-                self.shifter.shiftByte(self.pattern[i])
+            for i in range(len(pattern)):
+                self.shifter.shiftByte(pattern[i])
                 self.shifter.shiftByte(1<<i)
                 time.sleep(0.001)
