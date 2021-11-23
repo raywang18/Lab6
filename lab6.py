@@ -8,7 +8,7 @@ if __name__ == "__main__":
     led_display = LED8x8(dataPin, latchPin, clockPin)
     def display_fn(pattern):
       led_display.display(pattern)
-    p1 = multiprocessing.Process(target=display_fn, args=(pattern))
+    p1 = multiprocessing.Process(target=display_fn, args=([pattern]))
     p1.daemon = True
     p1.start()
     for i in range(len(pattern)):
