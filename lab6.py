@@ -1,6 +1,7 @@
 from LED8x8 import LED8x8
 import multiprocessing
 import random
+import time
 
 if __name__ == "__main__":
     dataPin, latchPin, clockPin = 17, 27, 22
@@ -25,3 +26,4 @@ if __name__ == "__main__":
         y += dy
 
       pattern[y] = ~(0b10000000 >> x) & 0b11111111
+      time.sleep(0.5)
