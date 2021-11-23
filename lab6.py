@@ -11,5 +11,5 @@ if __name__ == "__main__":
     for i in range(len(pattern)):
       multiArray[i] = pattern[i]
     display = LED8x8(dataPin, latchPin, clockPin, pattern)
-    p1 = multiprocessing.Process(target=display.display, args=(multiArray))
+    p1 = multiprocessing.Process(target=display.display, args=([multiArray]))
     p1.start()
