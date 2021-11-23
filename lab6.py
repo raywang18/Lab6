@@ -12,11 +12,12 @@ if __name__ == "__main__":
     p1 = multiprocessing.Process(target=display_fn, args=([pattern]))
     p1.daemon = True
     p1.start()
-    for i in range(len(pattern)):
-      pattern[i] = 0b11111111
     x = 0
     y = 0
     while True:
+      for i in range(len(pattern)):
+        pattern[i] = 0b11111111
+
       dx = random.randint(-1, 1)
       dy = random.randint(-1, 1)
 
