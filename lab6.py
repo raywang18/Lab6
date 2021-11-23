@@ -13,3 +13,5 @@ if __name__ == "__main__":
     display = LED8x8(dataPin, latchPin, clockPin, pattern)
     p1 = multiprocessing.Process(target=display.display, args=([multiArray]))
     p1.start()
+    while True:
+      multiArray[3] = 0b11111111
