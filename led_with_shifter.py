@@ -10,7 +10,7 @@ from led_display import LEDdisplay
 dataPin, latchPin, clockPin = 17, 27, 22
 
 # Pick a number sequence
-sequence = [8, 6, 7, 5, 3, 0, 9]
+sequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 theLEDdisplay= LEDdisplay(dataPin, latchPin, clockPin)
 
